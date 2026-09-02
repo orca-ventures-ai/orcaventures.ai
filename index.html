@@ -120,31 +120,44 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
+    gap: 8px;
     flex-wrap: wrap;
   }
   .copy{
-    font-family: var(--body);
-    font-size: 0.6875rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--grey);
-    background: transparent;
-    border: 1px solid rgba(11, 36, 82, 0.20);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3px;
+    margin: 0;
+    background: none;
+    border: 0;
     border-radius: 3px;
-    padding: 3px 9px;
-    line-height: 1.4;
+    line-height: 0;
+    color: var(--grey);
     cursor: pointer;
-    transition: color 0.15s ease, border-color 0.15s ease;
+    opacity: 0.65;
+    transition: color 0.15s ease, opacity 0.15s ease;
   }
+  .copy svg{
+    width: 13px;
+    height: 13px;
+    display: block;
+  }
+  .copy .tick{ display: none; }
   .copy:hover, .copy:focus-visible{
     color: var(--navy);
-    border-color: var(--navy);
+    opacity: 1;
+  }
+  .copy:focus-visible{
+    outline: 1px solid var(--navy);
+    outline-offset: 2px;
   }
   .copy[data-done="true"]{
     color: var(--teal);
-    border-color: rgba(15, 71, 97, 0.5);
+    opacity: 1;
   }
+  .copy[data-done="true"] .sheet{ display: none; }
+  .copy[data-done="true"] .tick{ display: block; }
 
   /* Footer */
   footer{
@@ -197,7 +210,10 @@
     <p class="role">Founder and Chief Executive</p>
     <p class="email-line">
       <a href="mailto:karina@orcaventures.ai">karina@orcaventures.ai</a>
-      <button class="copy" type="button" data-copy="karina@orcaventures.ai">Copy</button>
+      <button class="copy" type="button" data-copy="karina@orcaventures.ai" aria-label="Copy email address" title="Copy email address">
+        <svg class="sheet" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        <svg class="tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg>
+      </button>
     </p>
   </div>
 
@@ -225,12 +241,12 @@
     return ok;
   }
 
-  function flash(btn, message, done) {
-    btn.textContent = message;
+  function flash(btn, done) {
     btn.setAttribute("data-done", done ? "true" : "false");
+    btn.setAttribute("aria-label", done ? "Copied" : "Copy failed, select the address instead");
     window.setTimeout(function () {
-      btn.textContent = "Copy";
       btn.setAttribute("data-done", "false");
+      btn.setAttribute("aria-label", "Copy email address");
     }, 2000);
   }
 
@@ -241,15 +257,13 @@
       var text = btn.getAttribute("data-copy");
       if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(text).then(
-          function () { flash(btn, "Copied", true); },
+          function () { flash(btn, true); },
           function () {
-            var ok = fallbackCopy(text);
-            flash(btn, ok ? "Copied" : "Select it", ok);
+            flash(btn, fallbackCopy(text));
           }
         );
       } else {
-        var ok = fallbackCopy(text);
-        flash(btn, ok ? "Copied" : "Select it", ok);
+        flash(btn, fallbackCopy(text));
       }
     });
   }
