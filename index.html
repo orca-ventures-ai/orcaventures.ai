@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ORCA Ventures.AI</title>
+<meta name="description" content="ORCA holds the live state of a private fundraise and gives the general partner control. Built from the regulation, so it is current from day one.">
+<link rel="icon" href="orca-logo.svg" type="image/svg+xml">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ORCA Ventures.AI">
+<meta property="og:title" content="ORCA Ventures.AI">
+<meta property="og:description" content="Infrastructure for private fund formation.">
+<meta property="og:url" content="https://orcaventures.ai/">
+<meta name="twitter:card" content="summary">
+
+<style>
+  :root{
+    --cream:      #FBF9F5;
+    --navy:       #0B2452;
+    --teal:       #0F4761;
+    --grey:       #555555;
+    --ink:        #000000;
+    --rule:       rgba(11, 36, 82, 0.18);
+    --display: "Avenir Next", "Avenir", "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --body: Arial, "Helvetica Neue", Helvetica, sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+
+  html, body { height: 100%; }
+
+  body{
+    margin: 0;
+    background: var(--cream);
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 24px;
+    text-align: center;
+  }
+
+  main{
+    width: 100%;
+    max-width: 640px;
+  }
+
+  /* Logo */
+  .logo{
+    width: clamp(150px, 30vw, 210px);
+    height: auto;
+    display: block;
+    margin: 0 auto;
+  }
+
+  /* Title */
+  h1{
+    font-family: var(--display);
+    font-weight: 400;
+    color: var(--navy);
+    font-size: clamp(1.5rem, 4.2vw, 2.125rem);
+    line-height: 1.25;
+    letter-spacing: 0.005em;
+    margin: 56px 0 0;
+  }
+
+  /* Teaser */
+  .teaser{
+    max-width: 54ch;
+    margin: 24px auto 0;
+    font-size: 1.0625rem;
+    line-height: 1.7;
+    color: var(--ink);
+  }
+
+  /* Divider */
+  .divider{
+    width: 64px;
+    height: 1px;
+    background: var(--rule);
+    border: 0;
+    margin: 56px auto;
+  }
+
+  /* Contact */
+  .contact{
+    font-size: 1rem;
+    line-height: 1.75;
+  }
+  .contact p{ margin: 0; }
+  .contact .name{
+    font-family: var(--display);
+    color: var(--navy);
+    font-size: 1.0625rem;
+  }
+  .contact .role{
+    color: var(--grey);
+    font-size: 0.9375rem;
+  }
+  a{
+    color: var(--teal);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(15, 71, 97, 0.35);
+    padding-bottom: 1px;
+    transition: color 0.15s ease, border-color 0.15s ease;
+  }
+  a:hover, a:focus-visible{
+    color: var(--navy);
+    border-bottom-color: var(--navy);
+  }
+
+  /* Footer */
+  footer{
+    margin-top: 64px;
+    font-size: 0.8125rem;
+    line-height: 1.7;
+    color: var(--grey);
+  }
+  footer p{ margin: 0; }
+  footer .entity{ letter-spacing: 0.04em; }
+  footer a{
+    color: var(--grey);
+    border-bottom-color: rgba(85, 85, 85, 0.35);
+  }
+  footer a:hover, footer a:focus-visible{
+    color: var(--navy);
+    border-bottom-color: var(--navy);
+  }
+  footer .legal{ margin-top: 10px; }
+
+  @media (max-width: 480px){
+    body{ padding: 40px 20px; }
+    h1{ margin-top: 44px; }
+    .divider{ margin: 44px auto; }
+    footer{ margin-top: 52px; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    a{ transition: none; }
+  }
+</style>
+</head>
+<body>
+
+<main>
+
+  <img class="logo" src="orca-logo.svg" alt="ORCA Ventures.AI">
+
+  <h1>Infrastructure for private fund formation.</h1>
+
+  <p class="teaser">
+    ORCA holds the live state of a fundraise and gives the general partner control.
+    Built from the regulation, so it is current from day one.
+  </p>
+
+  <hr class="divider">
+
+  <div class="contact">
+    <p class="name">Karina Morawska</p>
+    <p class="role">Founder and Chief Executive</p>
+    <p><a href="mailto:karina@orcaventures.ai">karina@orcaventures.ai</a></p>
+  </div>
+
+  <footer>
+    <p class="entity">ORCA VENTURES AI LIMITED</p>
+    <p class="legal"><a href="legal.html">Legal information</a></p>
+  </footer>
+
+</main>
+
+</body>
+</html>
