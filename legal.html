@@ -101,6 +101,35 @@
     border-bottom-color: var(--navy);
   }
 
+  .email-line{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .copy{
+    font-family: var(--body);
+    font-size: 0.6875rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--grey);
+    background: transparent;
+    border: 1px solid rgba(11, 36, 82, 0.20);
+    border-radius: 3px;
+    padding: 3px 9px;
+    line-height: 1.4;
+    cursor: pointer;
+    transition: color 0.15s ease, border-color 0.15s ease;
+  }
+  .copy:hover, .copy:focus-visible{
+    color: var(--navy);
+    border-color: var(--navy);
+  }
+  .copy[data-done="true"]{
+    color: var(--teal);
+    border-color: rgba(15, 71, 97, 0.5);
+  }
+
   .back{
     margin-top: 56px;
     padding-top: 24px;
@@ -145,7 +174,10 @@
     <dd>15 Egerton Drive, Isleworth, England, TW7 7EQ</dd>
 
     <dt>Contact</dt>
-    <dd><a href="mailto:karina@orcaventures.ai">karina@orcaventures.ai</a></dd>
+    <dd class="email-line">
+      <a href="mailto:karina@orcaventures.ai">karina@orcaventures.ai</a>
+      <button class="copy" type="button" data-copy="karina@orcaventures.ai">Copy</button>
+    </dd>
   </dl>
 
   <h2>About this website</h2>
@@ -166,6 +198,54 @@
   <p class="back"><a href="index.html">Back to the home page</a></p>
 
 </main>
+
+<script>
+(function () {
+  function fallbackCopy(text) {
+    var ta = document.createElement("textarea");
+    ta.value = text;
+    ta.setAttribute("readonly", "");
+    ta.style.position = "fixed";
+    ta.style.top = "-1000px";
+    ta.style.opacity = "0";
+    document.body.appendChild(ta);
+    ta.select();
+    var ok = false;
+    try { ok = document.execCommand("copy"); } catch (e) { ok = false; }
+    document.body.removeChild(ta);
+    return ok;
+  }
+
+  function flash(btn, message, done) {
+    btn.textContent = message;
+    btn.setAttribute("data-done", done ? "true" : "false");
+    window.setTimeout(function () {
+      btn.textContent = "Copy";
+      btn.setAttribute("data-done", "false");
+    }, 2000);
+  }
+
+  var buttons = document.querySelectorAll(".copy");
+  for (var i = 0; i < buttons.length; i++) {
+    buttons[i].addEventListener("click", function () {
+      var btn = this;
+      var text = btn.getAttribute("data-copy");
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(
+          function () { flash(btn, "Copied", true); },
+          function () {
+            var ok = fallbackCopy(text);
+            flash(btn, ok ? "Copied" : "Select it", ok);
+          }
+        );
+      } else {
+        var ok = fallbackCopy(text);
+        flash(btn, ok ? "Copied" : "Select it", ok);
+      }
+    });
+  }
+})();
+</script>
 
 </body>
 </html>
